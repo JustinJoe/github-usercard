@@ -4,9 +4,9 @@ import axios from "axios";
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
-async function getData() {
+async function getData(user) {
   try {
-    let response = await axios.get("https://api.github.com/users/JustinJoe");
+    let response = await axios.get(`https://api.github.com/users/${user}`);
     let data = await response.data;
     getGitHubData(data)
     console.log(data)
@@ -68,9 +68,6 @@ function getGitHubData (obj) {
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
-const retrievedData = getData()
-// console.log(retrievedData)
-// getGitHubData(retrievedData)
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
@@ -84,6 +81,8 @@ const retrievedData = getData()
 */
 
 const followersArray = ["tetondan", "dustinmyers", "justsml", "luishrd", "bigknell"];
+
+followersArray.forEach(follower => getData(follower))
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
